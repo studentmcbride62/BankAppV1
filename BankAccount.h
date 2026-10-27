@@ -10,6 +10,7 @@ class BankAccount {
 private:
     std::string m_accHolder;
     std::string m_accNum;
+protected:
     double m_balance;
 public:
     BankAccount(const std::string &accHolder, const std::string &accNum, double balance);
