@@ -13,7 +13,8 @@ public:
         m_overdraftLimit = overdraftLimit;
     }
     ~CheckingAccount() {
-
+        // cleanup of objects and resources that the object used
+        std::cout << "\nCheckingAccount Object deconstructed\n";
     }
     bool withdraw(double amount) { // override base class withdraw method - form of polymorphism
         if (amount <= m_balance + m_overdraftLimit) {
@@ -23,13 +24,16 @@ public:
             m_balance -= amount;
             return true;
         }
-        else {
-            return false;
+        if (m_balance < 0 and amount <= m_overdraftLimit) {
+            m_overdraftLimit -=  amount;
+            m_balance -= amount;
+            return true;
         }
+        return false;
     }
     void display() {
         BankAccount::display();
-        std::cout << "Overdraft Limit: " << m_overdraftLimit << std::endl;
+        std::cout << "Overdraft Limit: $" << m_overdraftLimit << std::endl;
     }
 };
 
